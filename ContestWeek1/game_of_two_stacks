@@ -1,0 +1,70 @@
+import os
+import sys
+
+#
+# Complete the twoStacks function below.
+#
+def twoStacks(x, a, b):
+    total = 0
+    act = 0
+    bct = 0
+    count = 0
+    
+    while(True):
+        if((act<len(a)) or (bct<len(b))):
+            if(bct>=len(b) and act<len(a)):
+                if((total+a[act])<=x):
+                    total += a[act]
+                    count += 1
+                    act += 1
+                else:
+                    return count
+            elif(act>=len(a) and bct<len(b)):
+                if((total+b[bct])<=x):
+                    total += b[bct]
+                    count += 1
+                    bct += 1
+                else:
+                    return count
+            elif(a[act]<=b[bct]):
+                if((total+a[act])<=x):
+                    total += a[act]
+                    count += 1
+                    act += 1
+                else:
+                    return count
+            else:
+                if((total+b[bct])<=x):
+                    total += b[bct]
+                    count += 1
+                    bct += 1
+                else:
+                    return count
+        else:
+            return count
+    
+    return count
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    g = int(input())
+
+    for g_itr in range(g):
+        nmx = input().split()
+
+        n = int(nmx[0])
+
+        m = int(nmx[1])
+
+        x = int(nmx[2])
+
+        a = list(map(int, input().rstrip().split()))
+
+        b = list(map(int, input().rstrip().split()))
+
+        result = twoStacks(x, a, b)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()
